@@ -4,9 +4,14 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def calculate_no_show_risk(prior_no_shows, lead_time_days,
-                           transportation_barrier, reminder_confirmed, age_group):
+                           insurance_type, reminder_confirmed, age_group):
     score = 0
     reasons = []
+    insurance_weights = {
+        "private": 0,
+        "public": 1,
+        "uninsured": 2,
+    }
 
     if prior_no_shows >= 2:
         score += 3
@@ -22,9 +27,11 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
         score += 1
         reasons.append("moderate scheduling delay")
 
-    if transportation_barrier == "yes":
-        score += 2
-        reasons.append("transportation barrier")
+    score += insurance_weights.get(insurance_type, 0)
+    if insurance_type == "uninsured":
+        reasons.append("uninsured status")
+    elif insurance_type == "public":
+        reasons.append("public insurance")
 
     if reminder_confirmed == "no":
         score += 2
@@ -49,13 +56,13 @@ def index():
     if request.method == "POST":
         prior_no_shows = int(request.form["prior_no_shows"])
         lead_time_days = int(request.form["lead_time"])
-        transportation = request.form["transportation"]
+        insurance_type = request.form["insurance_type"]
         reminder = request.form["reminder"]
         age_group = request.form["age"]
 
         score, risk, reasons = calculate_no_show_risk(
             prior_no_shows, lead_time_days,
-            transportation, reminder, age_group
+            insurance_type, reminder, age_group
         )
 
         return render_template("index.html",
