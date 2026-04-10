@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>No-Show Risk Predictor</title>
+</head>
+<body>
+    <h1>No-Show Risk Predictor</h1>
+
+    <form method="POST">
+        <label>Prior No-Shows:</label>
+        <input type="number" name="prior_no_shows" required><br><br>
+
+        <label>Lead Time (days):</label>
+        <input type="number" name="lead_time" required><br><br>
+
+        <label>Transportation Barrier:</label>
+        <select name="transportation">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label>Reminder Confirmed:</label>
+        <select name="reminder">
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+        </select><br><br>
+
+        <label>Age Group:</label>
+        <select name="age">
+            <option value="young">Young</option>
+            <option value="middle">Middle</option>
+            <option value="older">Older</option>
+        </select><br><br>
+
+        <button type="submit">Calculate Risk</button>
+    </form>
+
+    {% if score is defined %}
+        <h2>Result</h2>
+        <p><strong>Score:</strong> {{ score }}</p>
+        <p><strong>Risk Level:</strong> {{ risk }}</p>
+
+        <p><strong>Reasons:</strong></p>
+        <ul>
+            {% for reason in reasons %}
+                <li>{{ reason }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>
