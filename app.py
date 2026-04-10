@@ -74,17 +74,22 @@ def index():
         # Input validation (no negatives)
         prior_no_shows = max(0, int(request.form["prior_no_shows"]))
         lead_time_days = max(0, int(request.form["lead_time"]))
-        age = max(0, int(request.form["age"]))
+        age_raw = request.form["age"].strip().lower()
 
         insurance_type = request.form["insurance_type"]
         appt_time = request.form["appt_time"]
         distance = request.form["distance"]
-        if age < 35:
-            age_group = "young"
-        elif age < 65:
-            age_group = "middle"
+        if age_raw in {"young", "middle", "older"}:
+            # Backward compatibility for older age-group form submissions.
+            age_group = age_raw
         else:
-            age_group = "older"
+            age = max(0, int(age_raw))
+            if age < 35:
+                age_group = "young"
+            elif age < 65:
+                age_group = "middle"
+            else:
+                age_group = "older"
 
         score, risk, reasons = calculate_no_show_risk(
             prior_no_shows,
