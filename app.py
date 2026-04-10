@@ -71,19 +71,25 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "POST":
-        # Input validation (no negatives)
-        prior_no_shows = max(0, int(request.form["prior_no_shows"]))
-        lead_time_days = max(0, int(request.form["lead_time"]))
-        age_raw = request.form["age"].strip().lower()
+        def parse_non_negative_int(value, default=0):
+            try:
+                return max(0, int(str(value).strip()))
+            except (TypeError, ValueError):
+                return default
 
-        insurance_type = request.form["insurance_type"]
-        appt_time = request.form["appt_time"]
-        distance = request.form["distance"]
+        # Input validation with safe defaults for backward compatibility.
+        prior_no_shows = parse_non_negative_int(request.form.get("prior_no_shows"), 0)
+        lead_time_days = parse_non_negative_int(request.form.get("lead_time"), 0)
+        age_raw = str(request.form.get("age", "0")).strip().lower()
+
+        insurance_type = request.form.get("insurance_type", "private")
+        appt_time = request.form.get("appt_time", "afternoon")
+        distance = request.form.get("distance", "near")
         if age_raw in {"young", "middle", "older"}:
             # Backward compatibility for older age-group form submissions.
             age_group = age_raw
         else:
-            age = max(0, int(age_raw))
+            age = parse_non_negative_int(age_raw, 0)
             if age < 35:
                 age_group = "young"
             elif age < 65:
