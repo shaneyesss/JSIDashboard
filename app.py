@@ -7,7 +7,7 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
     score = 0
     reasons = []
 
-    # Updated insurance weights
+    # insurance weights
     insurance_weights = {
         "private": 0,
         "public": 1,
@@ -66,10 +66,16 @@ def index():
         # Input validation (no negatives)
         prior_no_shows = max(0, int(request.form["prior_no_shows"]))
         lead_time_days = max(0, int(request.form["lead_time"]))
+        age = max(0, int(request.form["age"]))
 
         insurance_type = request.form["insurance_type"]
         reminder_confirmed = request.form["reminder"]
-        age_group = request.form["age"]
+        if age < 35:
+            age_group = "young"
+        elif age < 65:
+            age_group = "middle"
+        else:
+            age_group = "older"
 
         score, risk, reasons = calculate_no_show_risk(
             prior_no_shows,
