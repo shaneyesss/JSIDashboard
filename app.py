@@ -3,7 +3,7 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 def calculate_no_show_risk(prior_no_shows, lead_time_days,
-                           insurance_type, reminder_confirmed, age_group):
+                           insurance_type, appt_time, distance, age_group):
     score = 0
     reasons = []
 
@@ -39,12 +39,20 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
     elif insurance_type == "private":
         reasons.append("private insurance")
 
-    # 4. Reminder confirmation
-    if reminder_confirmed == "no":
-        score += 2
-        reasons.append("reminder not confirmed")
+    # 4. Appointment time
+    if appt_time == "morning":
+        score += 1
+        reasons.append("morning appointment")
 
-    # 5. Age group
+    # 5. Distance from clinic
+    if distance == "far":
+        score += 2
+        reasons.append("far distance from clinic")
+    elif distance == "moderate":
+        score += 1
+        reasons.append("moderate distance from clinic")
+
+    # 6. Age group
     if age_group == "young":
         score += 1
         reasons.append("younger age group")
@@ -69,7 +77,8 @@ def index():
         age = max(0, int(request.form["age"]))
 
         insurance_type = request.form["insurance_type"]
-        reminder_confirmed = request.form["reminder"]
+        appt_time = request.form["appt_time"]
+        distance = request.form["distance"]
         if age < 35:
             age_group = "young"
         elif age < 65:
@@ -81,7 +90,8 @@ def index():
             prior_no_shows,
             lead_time_days,
             insurance_type,
-            reminder_confirmed,
+            appt_time,
+            distance,
             age_group
         )
 
