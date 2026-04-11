@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>No-Show Risk Predictor - About</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+        }
+        .predictor {
+            background-color: #ecf0f1;
+            padding: 15px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+            border-radius: 4px;
+        }
+        .predictor h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+        .justification {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #bdc3c7;
+        }
+        .sources {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin-top: 30px;
+            border-radius: 4px;
+            border: 1px solid #dee2e6;
+        }
+        .sources h2 {
+            margin-top: 0;
+        }
+        .source-item {
+            margin: 10px 0;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .nav-button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        .nav-button:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>About the No-Show Risk Predictor</h1>
+
+    <p>This tool uses evidence-based predictors to assess the risk of patient no-shows at medical appointments. Understanding these factors helps healthcare providers implement targeted interventions to improve appointment attendance and optimize resource allocation.</p>
+
+    <h2>Predictors and Their Justification</h2>
+
+    <div class="predictor">
+        <h3>1. Prior No-Shows</h3>
+        <p>Prior no-show history is consistently identified as the strongest predictor of future missed appointments, reflecting persistent behavioral patterns in healthcare utilization.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Assigned the highest weight due to strong and consistent predictive power across studies.
+        </div>
+    </div>
+
+    <div class="predictor">
+        <h3>2. Lead Time (Days Between Scheduling and Appointment)</h3>
+        <p>Longer lead times are associated with higher no-show rates, likely due to reduced patient commitment and increased likelihood of schedule conflicts.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Weighted highly as a key scheduling-related factor consistently shown to influence attendance.
+        </div>
+    </div>
+
+    <div class="predictor">
+        <h3>3. Insurance Type (Private / Public / Uninsured)</h3>
+        <p>Insurance status serves as a proxy for socioeconomic factors and access to care, with publicly insured or uninsured patients exhibiting higher no-show rates.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Included as a moderate predictor reflecting structural and financial barriers to care.
+        </div>
+    </div>
+
+    <div class="predictor">
+        <h3>4. Age Group (18–34 / 35–64 / 65+)</h3>
+        <p>Younger patients are more likely to miss appointments, while older adults tend to have higher adherence to scheduled care.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Assigned a lower weight as a demographic factor that influences behavior but is less predictive than prior attendance history.
+        </div>
+    </div>
+
+    <div class="predictor">
+        <h3>5. Distance from Clinic (Near / Moderate / Far)</h3>
+        <p>Greater distance from the clinic is associated with higher no-show rates due to transportation barriers and reduced accessibility.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Included as a system-level access factor representing logistical barriers to attending appointments.
+        </div>
+    </div>
+
+    <div class="predictor">
+        <h3>📊 6. Appointment Time (Morning / Afternoon / Evening)</h3>
+        <p>Appointment time has been identified as a system-level scheduling factor that can influence no-show rates, with variations attributed to work schedules, daily routines, and competing obligations.</p>
+        <div class="justification">
+            <strong>Justification:</strong> Included as a secondary predictor to capture scheduling-related variability. Time of day is commonly used in predictive models but is generally less influential than behavioral and access-related factors.
+        </div>
+    </div>
+
+    <div class="sources">
+        <h2>Sources</h2>
+        <div class="source-item">
+            Carreras-García, Danae, et al. "Patient No-Show Prediction: A Systematic Literature Review." <em>Entropy</em>, vol. 22, no. 6, June 2020, p. 675. PubMed Central, <a href="https://doi.org/10.3390/e22060675" target="_blank">https://doi.org/10.3390/e22060675</a>.
+        </div>
+        <div class="source-item">
+            Liu, Dianbo, et al. "Machine Learning Approaches to Predicting No-Shows in Pediatric Medical Appointment." <em>Npj Digital Medicine</em>, vol. 5, no. 1, Apr. 2022, p. 50. www.nature.com, <a href="https://doi.org/10.1038/s41746-022-00594-w" target="_blank">https://doi.org/10.1038/s41746-022-00594-w</a>.
+        </div>
+    </div>
+
+    <a href="/" class="nav-button">Go to Risk Calculator</a>
+</body>
+</html>

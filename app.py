@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from pathlib import Path
 
 app = Flask(__name__)
 
@@ -66,6 +67,14 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
         risk = "Low"
 
     return score, risk, reasons
+
+
+@app.route("/landing")
+def landing():
+    landing_template = Path(app.template_folder or "templates") / "landing.html"
+    if landing_template.exists():
+        return render_template("landing.html")
+    return render_template("index.html")
 
 
 @app.route("/", methods=["GET", "POST"])
