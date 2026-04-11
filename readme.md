@@ -105,7 +105,7 @@ no-show-predictor/
 ├── app.py
 ├── templates/
 │   ├── index.html
-│   └── landing.html (optional)
+│   └── landing.html
 ```
 
 ---

@@ -38,7 +38,7 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
     elif insurance_type == "public":
         reasons.append("public insurance")
     elif insurance_type == "private":
-    reasons.append("private insurance")
+        reasons.append("private insurance")
 
     # 4. Appointment time
     if appt_time == "morning":
