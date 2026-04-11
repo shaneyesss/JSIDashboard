@@ -37,8 +37,6 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
         reasons.append("uninsured status")
     elif insurance_type == "public":
         reasons.append("public insurance")
-    elif insurance_type == "private":
-        reasons.append("private insurance")
 
     # 4. Appointment time
     if appt_time == "morning":
@@ -138,11 +136,10 @@ def index():
         selected_choices = {
             "Prior No-Shows": prior_no_shows,
             "Lead Time (days)": lead_time_days,
-            "Insurance Type": insurance_labels.get(insurance_type, insurance_type),
-            "Appointment Time": appt_time_labels.get(appt_time, appt_time),
-            "Distance from Clinic": distance_labels.get(distance, distance),
-            "Age": age_raw,
-            "Age Group": age_group_labels.get(age_group, age_group),
+            "Insurance Type": insurance_type.title(),
+            "Appointment Time": appt_time.title(),
+            "Distance from Clinic": distance.title(),
+            "Age Group": age_group.title()
         }
 
         return render_template(
