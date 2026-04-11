@@ -58,9 +58,9 @@ def calculate_no_show_risk(prior_no_shows, lead_time_days,
         reasons.append("younger age group")
 
     # Risk classification
-    if score >= 6:
+    if score >= 8:
         risk = "High"
-    elif score >= 3:
+    elif score >= 4:
         risk = "Medium"
     else:
         risk = "Low"
@@ -106,11 +106,42 @@ def index():
             age_group
         )
 
+        insurance_labels = {
+            "private": "Private Insurance",
+            "public": "Public Insurance",
+            "uninsured": "Uninsured",
+        }
+        appt_time_labels = {
+            "morning": "Morning",
+            "afternoon": "Afternoon",
+            "evening": "Evening",
+        }
+        distance_labels = {
+            "near": "Near (0-5 miles)",
+            "moderate": "Moderate (5-15 miles)",
+            "far": "Far (15+ miles)",
+        }
+        age_group_labels = {
+            "young": "Young",
+            "middle": "Middle",
+            "older": "Older",
+        }
+        selected_choices = {
+            "Prior No-Shows": prior_no_shows,
+            "Lead Time (days)": lead_time_days,
+            "Insurance Type": insurance_labels.get(insurance_type, insurance_type),
+            "Appointment Time": appt_time_labels.get(appt_time, appt_time),
+            "Distance from Clinic": distance_labels.get(distance, distance),
+            "Age": age_raw,
+            "Age Group": age_group_labels.get(age_group, age_group),
+        }
+
         return render_template(
             "index.html",
             score=score,
             risk=risk,
-            reasons=reasons
+            reasons=reasons,
+            selected_choices=selected_choices
         )
 
     return render_template("index.html")

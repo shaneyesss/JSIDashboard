@@ -45,6 +45,13 @@
         <p><strong>Score:</strong> {{ score }}</p>
         <p><strong>Risk Level:</strong> {{ risk }}</p>
 
+        <p><strong>Your Choices:</strong></p>
+        <ul>
+            {% for label, value in selected_choices.items() %}
+                <li><strong>{{ label }}:</strong> {{ value }}</li>
+            {% endfor %}
+        </ul>
+
         <p><strong>Reasons:</strong></p>
         <ul>
             {% for reason in reasons %}
