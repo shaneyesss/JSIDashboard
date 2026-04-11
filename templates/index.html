@@ -8,10 +8,10 @@
 
     <form method="POST">
         <label>Prior No-Shows:</label>
-        <input type="number" name="prior_no_shows" required><br><br>
+        <input type="number" name="prior_no_shows" min="0" required><br><br>
 
         <label>Lead Time (days):</label>
-        <input type="number" name="lead_time" required><br><br>
+        <input type="number" name="lead_time" min="0" required><br><br>
 
         <label>Insurance Type:</label>
         <select name="insurance_type">
