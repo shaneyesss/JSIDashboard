@@ -69,8 +69,8 @@ Each variable contributes to a total risk score using a weighted system:
 
 ### Risk Classification
 
-* **Low Risk:** 0–4
-* **Medium Risk:** 5–7
+* **Low Risk:** 0–3
+* **Medium Risk:** 4–7
 * **High Risk:** 8+
 
 ---
